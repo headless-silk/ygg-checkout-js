@@ -9,7 +9,7 @@ import {
 import { noop } from 'lodash';
 import React, { Component, ReactNode } from 'react';
 
-import { TranslatedString } from '@bigcommerce/checkout/locale';
+// import { TranslatedString } from '@bigcommerce/checkout/locale';
 import { CheckoutContextProps } from '@bigcommerce/checkout/payment-integration-api';
 import { AddressFormSkeleton } from '@bigcommerce/checkout/ui';
 
@@ -17,7 +17,7 @@ import { isEqualAddress, mapAddressFromFormValues } from '../address';
 import { withCheckout } from '../checkout';
 import { EMPTY_ARRAY, isFloatingLabelEnabled } from '../common/utility';
 import { getShippableItemsCount } from '../shipping';
-import { Legend } from '../ui/form';
+// import { Legend } from '../ui/form';
 
 import BillingForm, { BillingFormValues } from './BillingForm';
 import getBillingMethodId from './getBillingMethodId';
@@ -150,6 +150,7 @@ function mapToBillingProps({
     if (features['CHECKOUT-4183.checkout_google_address_autocomplete_uk']) {
         countriesWithAutocomplete.push('GB');
     }
+
     return {
         billingAddress: getBillingAddress(),
         countries: getBillingCountries() || EMPTY_ARRAY,
