@@ -23,7 +23,6 @@ const StaticBillingAddress: FunctionComponent<
 > = ({ address, payments = EMPTY_ARRAY }) => {
     const { paypalFastlaneAddresses } = usePayPalFastlaneAddress();
     const showPayPalFastlaneLabel = isPayPalFastlaneAddress(address, paypalFastlaneAddresses);
-
     if (payments.find((payment) => payment.providerId === 'amazonpay')) {
         return (
             <p>

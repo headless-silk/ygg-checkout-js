@@ -66,11 +66,11 @@ class Billing extends Component<BillingProps & WithCheckoutBillingProps> {
         return (
             <AddressFormSkeleton isLoading={isInitializing}>
                 <div className="checkout-form">
-                    <div className="form-legend-container">
+                    {/* <div className="form-legend-container">
                         <Legend testId="billing-address-heading">
                             <TranslatedString id="billing.billing_address_heading" />
                         </Legend>
-                    </div>
+                    </div> */}
                     <BillingForm
                         {...props}
                         onSubmit={this.handleSubmit}
@@ -150,7 +150,6 @@ function mapToBillingProps({
     if (features['CHECKOUT-4183.checkout_google_address_autocomplete_uk']) {
         countriesWithAutocomplete.push('GB');
     }
-
     return {
         billingAddress: getBillingAddress(),
         countries: getBillingCountries() || EMPTY_ARRAY,

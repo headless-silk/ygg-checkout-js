@@ -8,7 +8,7 @@
     @include grid-row;
 
     min-height: remCalc(200px);
-    padding: 0 spacing("single") 5 * spacing("single");
+    padding: 0;
 
     @include breakpoint("large") {
         padding-bottom: spacing("single");
@@ -16,6 +16,11 @@
 }
 
 .layout-cart {
+    margin-top: 40px;
+    padding: 0px !important;
+    border-radius: 16px;
+    border: 4px solid var(--Glass-Stroke, #FFF);
+    background: transparent;
     @include grid-column($columns: 12);
 
     @include breakpoint("large") {
@@ -29,6 +34,13 @@
     &.is-sticky {
         position: sticky;
         top: 0;
+    }
+
+    .optimizedCheckout-orderSummary {
+        border: unset;
+        background-color: transparent;
+        box-shadow: unset;
+        margin: 0px;
     }
 }
 
@@ -44,7 +56,8 @@
     }
 
     @include breakpoint("xlarge") {
-        padding-right: spacing("double") * 2;
+        padding-right: 64px;
+        padding-left: 0 !important;
     }
 }
 

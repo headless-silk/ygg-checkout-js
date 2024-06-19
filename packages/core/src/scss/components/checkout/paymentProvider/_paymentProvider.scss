@@ -5,6 +5,8 @@
     align-items: start;
     display: flex;
     justify-content: space-between;
+    align-items: center;
+    flex: 1;
 }
 
 .paymentProviderHeader-subtitleContainer {
@@ -23,7 +25,7 @@
     height: fontSize("large");
     object-fit: contain;
 
-    + .paymentProviderHeader-name {
+    +.paymentProviderHeader-name {
         margin-left: spacing("half");
         white-space: nowrap;
     }

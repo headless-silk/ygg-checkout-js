@@ -56,77 +56,77 @@ const GuestForm: FunctionComponent<
     isExpressPrivacyPolicy,
     isFloatingLabelEnabled,
 }) => {
-    const renderField = useCallback(
-        (fieldProps: FieldProps<boolean>) => (
-            <SubscribeField {...fieldProps} requiresMarketingConsent={requiresMarketingConsent} />
-        ),
-        [requiresMarketingConsent],
-    );
+        const renderField = useCallback(
+            (fieldProps: FieldProps<boolean>) => (
+                <SubscribeField {...fieldProps} requiresMarketingConsent={requiresMarketingConsent} />
+            ),
+            [requiresMarketingConsent],
+        );
 
-    return (
-        <Form
-            className="checkout-form"
-            id="checkout-customer-guest"
-            testId="checkout-customer-guest"
-        >
-            <Fieldset
-                legend={
-                    <Legend hidden>
-                        <TranslatedString id="customer.guest_customer_text" />
-                    </Legend>
-                }
+        return (
+            <Form
+                className="checkout-form"
+                id="checkout-customer-guest"
+                testId="checkout-customer-guest"
             >
-                <div className="customerEmail-container">
-                    <div className="customerEmail-body">
-                        <EmailField isFloatingLabelEnabled={isFloatingLabelEnabled} onChange={onChangeEmail}/>
+                <Fieldset
+                    legend={
+                        <Legend hidden>
+                            <TranslatedString id="customer.guest_customer_text" />
+                        </Legend>
+                    }
+                >
+                    <div className="customerEmail-container">
+                        <div className="customerEmail-body">
+                            <EmailField isFloatingLabelEnabled={isFloatingLabelEnabled} onChange={onChangeEmail} />
 
-                        {(canSubscribe || requiresMarketingConsent) && (
-                            <BasicFormField name="shouldSubscribe" render={renderField} />
-                        )}
+                            {(canSubscribe || requiresMarketingConsent) && (
+                                <BasicFormField name="shouldSubscribe" render={renderField} />
+                            )}
+                        </div>
+
+                        <div
+                            className={classNames('form-actions customerEmail-action', {
+                                'customerEmail-floating--enabled': isFloatingLabelEnabled,
+                            })}
+                        >
+                            <Button
+                                className="customerEmail-button"
+                                id="checkout-customer-continue"
+                                isLoading={isLoading}
+                                testId="customer-continue-as-guest-button"
+                                type="submit"
+                                variant={ButtonVariant.Primary}
+                            >
+                                <TranslatedString id={continueAsGuestButtonLabelId} />
+                            </Button>
+                        </div>
                     </div>
 
-                    <div
-                        className={classNames('form-actions customerEmail-action', {
-                            'customerEmail-floating--enabled': isFloatingLabelEnabled,
-                        })}
-                    >
-                        <Button
-                            className="customerEmail-button"
-                            id="checkout-customer-continue"
-                            isLoading={isLoading}
-                            testId="customer-continue-as-guest-button"
-                            type="submit"
-                            variant={ButtonVariant.Primary}
-                        >
-                            <TranslatedString id={continueAsGuestButtonLabelId} />
-                        </Button>
-                    </div>
-                </div>
+                    {privacyPolicyUrl && (
+                        <PrivacyPolicyField isExpressPrivacyPolicy={isExpressPrivacyPolicy} url={privacyPolicyUrl} />
+                    )}
 
-                {privacyPolicyUrl && (
-                    <PrivacyPolicyField isExpressPrivacyPolicy={isExpressPrivacyPolicy} url={privacyPolicyUrl} />
-                )}
+                    {!isLoading && (
+                        <p>
+                            <TranslatedString id="customer.login_text" />{' '}
+                            <a
+                                tabIndex={0}
+                                role="button"
+                                data-test="customer-continue-button"
+                                id="checkout-customer-login"
+                                onClick={onShowLogin}
+                            >
+                                <TranslatedString id="customer.login_action" />
+                            </a>
+                        </p>
+                    )}
 
-                {!isLoading && (
-                    <p>
-                        <TranslatedString id="customer.login_text" />{' '}
-                        <a
-                            tabIndex={0}
-                            role="button"
-                            data-test="customer-continue-button"
-                            id="checkout-customer-login"
-                            onClick={onShowLogin}
-                        >
-                            <TranslatedString id="customer.login_action" />
-                        </a>
-                    </p>
-                )}
-
-                {checkoutButtons}
-            </Fieldset>
-        </Form>
-    );
-};
+                    {checkoutButtons}
+                </Fieldset>
+            </Form>
+        );
+    };
 
 export default withLanguage(
     withFormik<GuestFormProps & WithLanguageProps, GuestFormValues>({

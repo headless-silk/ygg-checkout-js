@@ -1,6 +1,16 @@
 @import "../ui/Base";
 
 .checkout-address--static {
+    p {
+        color: var(--Primary-Text-Color, #121212);
+        font-family: 'Montserrat';
+        font-size: 14px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: 22px;
+    }
+
+
     .address-entry {
         margin: 0;
     }

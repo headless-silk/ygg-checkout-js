@@ -90,18 +90,43 @@
 .customerView-body {
     @include textTruncateMultiline;
 
-    margin-right: spacing("single");
+    // margin-right: spacing("single");
     width: 100%;
+    color: var(--Primary-Text-Color, #121212);
+    /* Body/regular */
+    font-family: 'Montserrat';
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 22px;
+}
+
+.form-input {
+    background-image:
+        linear-gradient(to right, #f3f3f3, #f3f3f3),
+        linear-gradient(90deg, #b79bd0, #66398f) !important;
+    border: 2px solid transparent !important;
+    border-radius: 16px !important;
+    background-clip: padding-box, border-box !important;
+    backdrop-filter: blur(21px);
+    background-origin: padding-box, border-box !important;
+    color: var(--Primary-Text-Color, #121212);
+    /* Label/regular */
+    font-family: 'Poppins';
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 24px;
 }
 
 // Button Width Function
 //
 // -----------------------------------------------------------------------------
 $buttonWidthMap: (
-    single:                     span $wallet-button-track-size,
-    half:                       span $wallet-button-track-size / 2,
-    third:                      span $wallet-button-track-size / 3,
-    quarter:                    span $wallet-button-track-size / 4
+    single: span $wallet-button-track-size,
+    half: span $wallet-button-track-size / 2,
+    third: span $wallet-button-track-size / 3,
+    quarter: span $wallet-button-track-size / 4
 );
 
 @function buttonWidth($key) {
@@ -127,7 +152,7 @@ $buttonWidthMap: (
         grid-template-columns: repeat($wallet-button-track-size, 1fr);
         margin: 0;
 
-        > div {
+        >div {
             height: $wallet-button-height;
             margin-right: 0;
             margin-top: 0;
@@ -162,23 +187,25 @@ $buttonWidthMap: (
 
 // wallet buttons auto layout based on the number of button divs
 .checkout-buttons-auto-layout {
-    .checkoutRemote > div:first-child:nth-last-child(1) {
+    .checkoutRemote>div:first-child:nth-last-child(1) {
         grid-column: buttonWidth('single');
         max-width: $wallet-button-max-width;
     }
 
-    .checkoutRemote > div:first-child:nth-last-child(2),div:first-child:nth-last-child(2) ~ div {
+    .checkoutRemote>div:first-child:nth-last-child(2),
+    div:first-child:nth-last-child(2)~div {
         grid-column: buttonWidth('half');
     }
 
-    .checkoutRemote > div:first-child:nth-last-child(3) {
+    .checkoutRemote>div:first-child:nth-last-child(3) {
         grid-column: buttonWidth('single');
 
         @include breakpoint("small") {
             grid-column: buttonWidth('third');
         }
     }
-    .checkoutRemote > div:first-child:nth-last-child(3) ~ div:nth-child(n + 2){
+
+    .checkoutRemote>div:first-child:nth-last-child(3)~div:nth-child(n + 2) {
         grid-column: buttonWidth('half');
 
         @include breakpoint("small") {
@@ -186,7 +213,8 @@ $buttonWidthMap: (
         }
     }
 
-    .checkoutRemote > div:first-child:nth-last-child(4),div:first-child:nth-last-child(4) ~ div {
+    .checkoutRemote>div:first-child:nth-last-child(4),
+    div:first-child:nth-last-child(4)~div {
         grid-column: buttonWidth('half');
 
         @include breakpoint("medium") {
@@ -202,17 +230,19 @@ $buttonWidthMap: (
         }
     }
 
-    .checkoutRemote > div:first-child:nth-last-child(5) {
+    .checkoutRemote>div:first-child:nth-last-child(5) {
         grid-column: buttonWidth('single');
 
         @include breakpoint("small") {
             grid-column: buttonWidth('half');
         }
     }
-    .checkoutRemote > div:first-child:nth-last-child(5) ~ div:nth-child(2){
+
+    .checkoutRemote>div:first-child:nth-last-child(5)~div:nth-child(2) {
         grid-column: buttonWidth('half');
     }
-    .checkoutRemote > div:first-child:nth-last-child(5) ~ div:nth-child(n+3){
+
+    .checkoutRemote>div:first-child:nth-last-child(5)~div:nth-child(n+3) {
         grid-column: buttonWidth('half');
 
         @include breakpoint("small") {
@@ -220,7 +250,7 @@ $buttonWidthMap: (
         }
     }
 
-    .checkoutRemote > div {
+    .checkoutRemote>div {
         grid-column: buttonWidth('half');
 
         @include breakpoint("small") {
@@ -250,4 +280,43 @@ $buttonWidthMap: (
     display: inline-block;
     flex-grow: 2;
     height: $container-border-global-size;
+}
+
+.form-legend-container {
+    a {
+        color: var(--Purple, #62328A);
+        font-family: 'Poppins';
+        font-size: 16px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: 24px;
+        text-decoration-line: underline;
+    }
+}
+
+.form-actions {
+    .optimizedCheckout-buttonSecondary {
+        height: 48px;
+        border-radius: 2rem;
+        font-weight: 700;
+        color: #66398f;
+        background-image: linear-gradient(to right, #fff, #fff),
+            linear-gradient(90deg, #b79bd0, #66398f) !important;
+        border: 2px solid transparent !important;
+        box-shadow: 0 4px 20px 0 rgba(112, 10, 160, 0.1) !important;
+        background-clip: padding-box,
+            border-box;
+        background-origin: padding-box,
+            border-box;
+        display: inline-flex;
+        font-family: 'PoppinsBold', sans-serif;
+        font-size: 16px;
+        line-height: 24px;
+        align-items: center;
+        gap: 16px;
+    }
+}
+
+#checkout-customer-login {
+    color: #66398f;
 }

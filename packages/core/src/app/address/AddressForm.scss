@@ -1,15 +1,16 @@
 @import "../ui/Base";
 
 .checkout-address:has(.floating-form-field) {
-    margin-left: -0.5 * $floating-form-field-spacing;
-    margin-right: -0.5 * $floating-form-field-spacing;
+    // margin-left: -0.5 * $floating-form-field-spacing;
+    // margin-right: -0.5 * $floating-form-field-spacing;
 }
 
 .checkout-address {
     display: flex;
     flex-flow: row wrap;
-    margin-left: -1 * spacing("half");
-    margin-right: -1 * spacing("half");
+    // margin-left: -1 * spacing("half");
+    // margin-right: -1 * spacing("half");
+    column-gap: 16px;
 
     .dynamic-form-addressState,
     .dynamic-form-field {
@@ -26,8 +27,10 @@
     }
 
     .dynamic-form-field.floating-form-field {
-        margin-bottom: $floating-form-field-spacing;
-        padding: 0 0.5 * $floating-form-field-spacing;
+        // margin-bottom: $floating-form-field-spacing;
+        // padding: 0 0.5 * $floating-form-field-spacing;
+        margin-bottom: 16px;
+        padding: 0;
     }
 
     .dynamic-form-field--province,
@@ -37,13 +40,41 @@
     .dynamic-form-field--phone,
     .dynamic-form-field--city {
         @include breakpoint("small") {
-            flex-basis: 50%;
+            flex-basis: calc(50% - 8px);
         }
     }
 
     .dynamic-form-field--postCode {
         @include breakpoint("small") {
-            flex-basis: 30%;
+            flex-basis: calc(50% - 8px);
         }
     }
+
+    .form-input,
+    .form-select {
+        background-image:
+            linear-gradient(to right, #f3f3f3, #f3f3f3),
+            linear-gradient(90deg, #b79bd0, #66398f) !important;
+        border: 2px solid transparent !important;
+        border-radius: 16px !important;
+        background-clip: padding-box, border-box !important;
+        backdrop-filter: blur(21px);
+        background-origin: padding-box, border-box !important;
+        color: var(--Primary-Text-Color, #121212);
+        /* Label/regular */
+        font-family: 'Poppins';
+        font-size: 16px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: 24px;
+    }
+
+    // .form-label {
+    //     color: var(--Default-Field-Grey, #5F5F5F);
+    //     font-family: 'Poppins';
+    //     font-size: 12px;
+    //     font-style: normal;
+    //     font-weight: 400;
+    //     line-height: 16px;
+    // }
 }

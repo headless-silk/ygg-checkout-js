@@ -37,37 +37,40 @@ const CheckoutStepHeader: FunctionComponent<CheckoutStepHeaderProps> = ({
             })}
             onClick={preventDefault(isEditable && onEdit ? () => onEdit(type) : noop)}
         >
-            <div className="stepHeader-figure stepHeader-column">
-                <IconCheck
-                    additionalClassName={classNames(
-                        'stepHeader-counter',
-                        'optimizedCheckout-step',
-                        { 'stepHeader-counter--complete': isComplete },
-                    )}
-                />
+            <div className='stepHeader-header'>
+                <div className="stepHeader-figure stepHeader-column">
+                    <IconCheck
+                        additionalClassName={classNames(
+                            'stepHeader-counter',
+                            'optimizedCheckout-step',
+                            { 'stepHeader-counter--complete': isComplete },
+                        )}
+                    />
 
-                <h2 className="stepHeader-title optimizedCheckout-headingPrimary">{heading}</h2>
+                    <h2 className="stepHeader-title optimizedCheckout-headingPrimary">{heading}</h2>
+                </div>
+
+
+
+                {isEditable && !isActive && (
+                    <div className="stepHeader-actions stepHeader-column">
+                        <Button
+                            aria-expanded={isActive}
+                            size={ButtonSize.Tiny}
+                            testId="step-edit-button"
+                            variant={ButtonVariant.Secondary}
+                        >
+                            <TranslatedString id="common.edit_action" />
+                        </Button>
+                    </div>
+                )}
             </div>
-
             <div
                 className="stepHeader-body stepHeader-column optimizedCheckout-contentPrimary"
                 data-test="step-info"
             >
                 {!isActive && isComplete && summary}
             </div>
-
-            {isEditable && !isActive && (
-                <div className="stepHeader-actions stepHeader-column">
-                    <Button
-                        aria-expanded={isActive}
-                        size={ButtonSize.Tiny}
-                        testId="step-edit-button"
-                        variant={ButtonVariant.Secondary}
-                    >
-                        <TranslatedString id="common.edit_action" />
-                    </Button>
-                </div>
-            )}
         </div>
     );
 };
