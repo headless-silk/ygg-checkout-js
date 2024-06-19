@@ -95,7 +95,6 @@ class AddressForm extends Component<AddressFormProps & WithLanguageProps> {
             shouldShowSaveAddress,
             isFloatingLabelEnabled,
         } = this.props;
-
         return (
             <>
                 <Fieldset>

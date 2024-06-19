@@ -156,6 +156,7 @@ const BillingForm = ({
                     variant={ButtonVariant.Primary}
                 >
                     <TranslatedString id="common.continue_action" />
+                    <img src='../static/svg/continue.svg'></img>
                 </Button>
             </div>
         </Form>
@@ -187,17 +188,17 @@ export default withLanguage(
         }: BillingFormProps & WithLanguageProps) =>
             methodId === 'amazonpay'
                 ? lazy<Partial<AddressFormValues>>((values) =>
-                      getCustomFormFieldsValidationSchema({
-                          translate: getTranslateAddressError(language),
-                          formFields: getFields(values && values.countryCode),
-                      }),
-                  )
+                    getCustomFormFieldsValidationSchema({
+                        translate: getTranslateAddressError(language),
+                        formFields: getFields(values && values.countryCode),
+                    }),
+                )
                 : lazy<Partial<AddressFormValues>>((values) =>
-                      getAddressFormFieldsValidationSchema({
-                          language,
-                          formFields: getFields(values && values.countryCode),
-                      }),
-                  ),
+                    getAddressFormFieldsValidationSchema({
+                        language,
+                        formFields: getFields(values && values.countryCode),
+                    }),
+                ),
         enableReinitialize: true,
     })(BillingForm),
 );

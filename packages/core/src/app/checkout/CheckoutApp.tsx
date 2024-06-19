@@ -69,6 +69,7 @@ export default class CheckoutApp extends Component<CheckoutAppProps> {
                                     embeddedSupport={this.embeddedSupport}
                                     errorLogger={this.errorLogger}
                                 />
+                                <div>111111111111111111111111</div>
                             </ExtensionProvider>
                         </AnalyticsProvider>
                     </CheckoutProvider>

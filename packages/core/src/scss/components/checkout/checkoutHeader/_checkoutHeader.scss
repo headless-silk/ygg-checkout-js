@@ -3,8 +3,8 @@
 // =============================================================================
 
 .checkoutHeader {
-    background-color: container("fill", "dark");
-    border-bottom: container("border");
+    background-color: #fff;
+    // border-bottom: container("border");
     text-align: center;
 
     @include breakpoint("small") {
@@ -19,7 +19,7 @@
 .checkoutHeader-content {
     @include grid-row;
 
-    padding: spacing("single");
+    padding: 24px 0 !important;
 
     @include breakpoint("small") {
         padding: spacing("double");
@@ -32,4 +32,8 @@
     color: inherit;
     margin-bottom: 0;
     word-wrap: break-word;
+
+    img {
+        width: 187px;
+    }
 }

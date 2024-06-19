@@ -41,47 +41,47 @@ const PaymentMethodList: FunctionComponent<
     onSelect = noop,
     onUnhandledError,
 }) => {
-    const handleSelect = useCallback(
-        (value: string) => {
-            onSelect(getPaymentMethodFromListValue(methods, value));
-        },
-        [methods, onSelect],
-    );
+        const handleSelect = useCallback(
+            (value: string) => {
+                onSelect(getPaymentMethodFromListValue(methods, value));
+            },
+            [methods, onSelect],
+        );
 
-    return (
-        <Checklist
-            defaultSelectedItemId={values.paymentProviderRadio}
-            isDisabled={isInitializingPayment}
-            name="paymentProviderRadio"
-            onSelect={handleSelect}
-        >
-            {methods.map((method) => {
-                const value = getUniquePaymentMethodId(method.id, method.gateway);
-                const showOnlyOnMobileDevices = get(
-                    method,
-                    'initializationData.showOnlyOnMobileDevices',
-                    false,
-                );
+        return (
+            <Checklist
+                defaultSelectedItemId={values.paymentProviderRadio}
+                isDisabled={isInitializingPayment}
+                name="paymentProviderRadio"
+                onSelect={handleSelect}
+            >
+                {methods.map((method) => {
+                    const value = getUniquePaymentMethodId(method.id, method.gateway);
+                    const showOnlyOnMobileDevices = get(
+                        method,
+                        'initializationData.showOnlyOnMobileDevices',
+                        false,
+                    );
 
-                if (showOnlyOnMobileDevices && !isMobile()) {
-                    return;
-                }
+                    if (showOnlyOnMobileDevices && !isMobile()) {
+                        return;
+                    }
 
-                return (
-                    <PaymentMethodListItem
-                        isDisabled={isInitializingPayment}
-                        isEmbedded={isEmbedded}
-                        isUsingMultiShipping={isUsingMultiShipping}
-                        key={value}
-                        method={method}
-                        onUnhandledError={onUnhandledError}
-                        value={value}
-                    />
-                );
-            })}
-        </Checklist>
-    );
-};
+                    return (
+                        <PaymentMethodListItem
+                            isDisabled={isInitializingPayment}
+                            isEmbedded={isEmbedded}
+                            isUsingMultiShipping={isUsingMultiShipping}
+                            key={value}
+                            method={method}
+                            onUnhandledError={onUnhandledError}
+                            value={value}
+                        />
+                    );
+                })}
+            </Checklist>
+        );
+    };
 
 interface PaymentMethodListItemProps {
     isDisabled?: boolean;

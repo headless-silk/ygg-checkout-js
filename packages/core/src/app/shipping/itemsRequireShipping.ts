@@ -4,7 +4,7 @@ const itemsRequireShipping = (cart?: Cart, config?: StoreConfig) => {
     if (!cart) {
         return false;
     }
-
+    // console.log(cart.lineItems.physicalItems)
     if (cart.lineItems.physicalItems.some((lineItem) => lineItem.isShippingRequired)) {
         return true;
     }

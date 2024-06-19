@@ -6,8 +6,8 @@
     margin: 0 -1 * spacing("half");
 }
 
-.form-ccFields > .form-field,
-.form-ccFields > .form-ccFields-field {
+.form-ccFields>.form-field,
+.form-ccFields>.form-ccFields-field {
     display: block;
     flex-grow: 1;
     margin-bottom: spacing("base");
@@ -28,7 +28,7 @@
 
 .form-field--ccNumber,
 .form-field--ccName {
-    flex-basis: 65%;
+    flex-basis: 60%;
 }
 
 .form-field--ccDocument {
