@@ -82,3 +82,49 @@
         width: $printLayout-widthFixed;
     }
 }
+
+.checkout-footer {
+    @include grid-row;
+
+    margin: 0 auto;
+    padding: 24px 0;
+}
+
+.checkout-footer-content {
+    width: 100%;
+    display: inline-flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.checkout-footer_needHelp {
+    font-size: 14px;
+    line-height: 22px;
+    font-weight: 600;
+    font-family: 'Montserrat';
+
+    span {
+        text-decoration-line: underline;
+    }
+}
+
+.checkout-footer_description {
+    font-size: 14px;
+    line-height: 22px;
+    font-weight: 400;
+    font-family: 'Montserrat';
+    color: #121212;
+}
+
+.checkout-footer_privacyAndTerms {
+    font-size: 14px;
+    line-height: 22px;
+    font-weight: 600;
+    font-family: 'Montserrat';
+    display: flex;
+    gap: 24px;
+
+    a {
+        text-decoration-line: underline;
+    }
+}

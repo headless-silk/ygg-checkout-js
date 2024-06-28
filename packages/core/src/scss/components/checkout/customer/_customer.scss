@@ -22,6 +22,67 @@
             }
         }
     }
+
+    display: flex;
+    flex-flow: row wrap;
+    column-gap: 16px;
+
+    >div {
+        flex: 1;
+        flex-basis: 100%;
+        max-width: 100%;
+        margin-bottom:16px;
+    }
+
+    >div:last-child{
+        flex:auto;
+        flex-basis: auto;
+    }
+
+    .dynamic-form-field--firstName,
+    .dynamic-form-field--lastName {
+        flex-basis: calc(50% - 8px);
+    }
+
+    .customer-checkbox{
+        >div{
+            display: flex;
+            align-items: center;
+            column-gap:8px;
+            margin-bottom:16px;
+
+            input{
+                border-radius: 4px;
+                width: 16px;
+                height: 16px;
+                border: 1px solid #070313;
+            }
+
+            .checked{
+                background-color: color("highlight");
+                border-color: color("highlight");
+            }
+
+            label{
+                margin-bottom:0;
+            }
+        }
+
+        .customer-checkbox_leaveTextarea{
+            min-height:144px;
+            margin: -8px 0 16px 30px;
+            width: calc(100% - 30px);
+        }
+
+        .customer-checkbox_leaveTextarea::placeholder{
+            color:#5f5f5f;
+        }
+    }
+}
+
+.customerEmail-container:before{
+    content:'';
+    display: none;
 }
 
 .customerEmail-action {
@@ -47,7 +108,7 @@
 
 .customerEmail-button {
     padding: $customerEmail-button-padding;
-    width: 100%;
+    // width: 100%;
 }
 
 .stripeCustomerEmail-button {
@@ -117,6 +178,10 @@
     font-style: normal;
     font-weight: 400;
     line-height: 24px;
+
+    ::placeholder{
+        color:#5f5f5f;
+    }
 }
 
 // Button Width Function

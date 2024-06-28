@@ -21,6 +21,10 @@ export interface CheckoutStepProps {
     onEdit?(step: CheckoutStepType): void;
 }
 
+export interface CustomerSignOutEvent {
+    isCartEmpty: boolean;
+}
+
 export interface CheckoutStepState {
     isClosed: boolean;
 }
@@ -108,8 +112,8 @@ export default class CheckoutStep extends Component<CheckoutStepProps, CheckoutS
                         exit={!matched}
                         in={isActive}
                         mountOnEnter
-                        onExited={ this.onAnimationEnd }
-                        timeout={ {} }
+                        onExited={this.onAnimationEnd}
+                        timeout={{}}
                         unmountOnExit
                     >
                         <div

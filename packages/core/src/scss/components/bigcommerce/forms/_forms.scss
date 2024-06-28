@@ -30,6 +30,13 @@
     transform: scale(0.5);
 }
 
+.form-checkbox + .form-label::before{
+    border: 1px solid #070313;
+    border-radius: 4px;
+    width: 16px;
+    height:16px;
+}
+
 .formField--helpText {
     color: color("greys");
 }

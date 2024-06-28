@@ -55,8 +55,8 @@ const DynamicFormField: FunctionComponent<DynamicFormFieldProps> = ({
     const fieldName = parentFieldName ? `${parentFieldName}.${name}` : name;
     const isFloatingLabelSupportedFieldType = Boolean(
         isFloatingLabelEnabled &&
-            (includes(['text', 'password', 'dropdown', 'date', 'multiline'], fieldType) ||
-                !fieldType),
+        (includes(['text', 'password', 'dropdown', 'date', 'multiline'], fieldType) ||
+            !fieldType),
     );
     const labelComponent = useMemo(
         () => (

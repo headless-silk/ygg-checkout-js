@@ -54,7 +54,8 @@ const BillingForm = ({
     googleMapsApiKey,
     billingAddress,
     countriesWithAutocomplete,
-    customer: { addresses, isGuest },
+    // customer: { addresses, isGuest },
+    customer: { addresses },
     getFields,
     countries,
     isUpdating,
@@ -139,7 +140,8 @@ const BillingForm = ({
                             googleMapsApiKey={googleMapsApiKey}
                             isFloatingLabelEnabled={isFloatingLabelEnabled}
                             setFieldValue={setFieldValue}
-                            shouldShowSaveAddress={!isGuest}
+                            // shouldShowSaveAddress={!isGuest}
+                            shouldShowSaveAddress={true}
                         />
                     </AddressFormSkeleton>
                 )}
@@ -156,7 +158,7 @@ const BillingForm = ({
                     variant={ButtonVariant.Primary}
                 >
                     <TranslatedString id="common.continue_action" />
-                    <img src='../static/svg/continue.svg'></img>
+                    <img src='https://store-z71kel45y3.mybigcommerce.com/content/continue.svg' />
                 </Button>
             </div>
         </Form>

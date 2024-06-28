@@ -26,7 +26,6 @@ export interface CheckoutAppProps {
     sentryConfig?: BrowserOptions;
     sentrySampleRate?: number;
 }
-
 export default class CheckoutApp extends Component<CheckoutAppProps> {
     private checkoutService = createCheckoutService({
         locale: getLanguageService().getLocale(),
@@ -54,7 +53,6 @@ export default class CheckoutApp extends Component<CheckoutAppProps> {
 
         ReactModal.setAppElement(`#${containerId}`);
     }
-
     render() {
         return (
             <ErrorBoundary logger={this.errorLogger}>
@@ -69,7 +67,16 @@ export default class CheckoutApp extends Component<CheckoutAppProps> {
                                     embeddedSupport={this.embeddedSupport}
                                     errorLogger={this.errorLogger}
                                 />
-                                <div>111111111111111111111111</div>
+                                <div className='checkout-footer'>
+                                    <div className='checkout-footer-content'>
+                                        <div className='checkout-footer_needHelp'><a href="tel:1.877.526.4483">Need Help? Call us <span>1.877.526.4483</span></a></div>
+                                        <div className='checkout-footer_description'>All sales are final and all contributions are delivered directly to the charity.</div>
+                                        <div className='checkout-footer_privacyAndTerms'>
+                                            <a>Privacy Policy</a>
+                                            <a>Terms & Conditions</a>
+                                        </div>
+                                    </div>
+                                </div>
                             </ExtensionProvider>
                         </AnalyticsProvider>
                     </CheckoutProvider>

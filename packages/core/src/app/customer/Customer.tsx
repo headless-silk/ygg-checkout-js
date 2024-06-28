@@ -48,6 +48,7 @@ export interface CustomerProps {
     onChangeViewType?(viewType: CustomerViewType): void;
     onAccountCreated?(): void;
     onContinueAsGuest?(): void;
+    onContinue?(info:CustomerInfoProps):void;
     onContinueAsGuestError?(error: Error): void;
     onReady?(): void;
     onSubscribeToNewsletter(subscribe: boolean): void;
@@ -55,6 +56,16 @@ export interface CustomerProps {
     onSignInError?(error: Error): void;
     onUnhandledError?(error: Error): void;
     onWalletButtonClick?(methodName: string): void;
+}
+
+export interface CustomerInfoProps {
+    email?: string; 
+    firstName?:string;
+    lastName?:string;
+    eventName?:string;
+    shouldSubscribe?: boolean;
+    isDedication?:boolean;
+    isAnonymously?:boolean;
 }
 
 export interface WithCheckoutCustomerProps {
@@ -127,7 +138,7 @@ class Customer extends Component<CustomerProps & WithCheckoutCustomerProps & Ana
 
         try {
             if (providerWithCustomCheckout && providerWithCustomCheckout !== PaymentMethodId.StripeUPE) {
-                await initializeCustomer({methodId: providerWithCustomCheckout});
+                await initializeCustomer({ methodId: providerWithCustomCheckout });
             }
         } catch (error) {
             onUnhandledError(error);
@@ -159,6 +170,8 @@ class Customer extends Component<CustomerProps & WithCheckoutCustomerProps & Ana
         const shouldRenderCreateAccountForm = viewType === CustomerViewType.CreateAccount;
         const shouldRenderLoginForm = !shouldRenderGuestForm && !shouldRenderCreateAccountForm;
 
+        console.log(isEmailLoginFormOpen, shouldRenderLoginForm, shouldRenderGuestForm, shouldRenderCreateAccountForm)
+
         return (
             <CustomerSkeleton isLoading={!isReady}>
                 {isEmailLoginFormOpen && this.renderEmailLoginLinkForm()}
@@ -168,6 +181,7 @@ class Customer extends Component<CustomerProps & WithCheckoutCustomerProps & Ana
             </CustomerSkeleton>
         );
     }
+
 
     private renderGuestForm(): ReactNode {
         const {
@@ -193,17 +207,19 @@ class Customer extends Component<CustomerProps & WithCheckoutCustomerProps & Ana
             shouldRenderStripeForm,
         } = this.props;
 
+console.log(isWalletButtonsOnTop , isPaymentDataRequired)
+
         const checkoutButtons = isWalletButtonsOnTop || !isPaymentDataRequired
-          ? null
-          : <CheckoutButtonList
-            checkEmbeddedSupport={checkEmbeddedSupport}
-            deinitialize={deinitializeCustomer}
-            initialize={initializeCustomer}
-            isInitializing={isInitializing}
-            methodIds={checkoutButtonIds}
-            onClick={onWalletButtonClick}
-            onError={onUnhandledError}
-          />;
+            ? null
+            : <CheckoutButtonList
+                checkEmbeddedSupport={checkEmbeddedSupport}
+                deinitialize={deinitializeCustomer}
+                initialize={initializeCustomer}
+                isInitializing={isInitializing}
+                methodIds={checkoutButtonIds}
+                onClick={onWalletButtonClick}
+                onError={onUnhandledError}
+            />;
 
         const isLoadingGuestForm = isWalletButtonsOnTop ?
             isContinuingAsGuest || isExecutingPaymentMethodCheckout :
@@ -229,21 +245,21 @@ class Customer extends Component<CustomerProps & WithCheckoutCustomerProps & Ana
                     step={step}
                 />
                 :
-            <GuestForm
-                canSubscribe={canSubscribe}
-                checkoutButtons={checkoutButtons}
-                continueAsGuestButtonLabelId="customer.continue"
-                defaultShouldSubscribe={isSubscribed}
-                email={this.draftEmail || email}
-                isExpressPrivacyPolicy={isExpressPrivacyPolicy}
-                isFloatingLabelEnabled={isFloatingLabelEnabled}
-                isLoading={isLoadingGuestForm}
-                onChangeEmail={this.handleChangeEmail}
-                onContinueAsGuest={this.handleContinueAsGuest}
-                onShowLogin={this.handleShowLogin}
-                privacyPolicyUrl={privacyPolicyUrl}
-                requiresMarketingConsent={requiresMarketingConsent}
-            />
+                <GuestForm
+                    canSubscribe={canSubscribe}
+                    checkoutButtons={checkoutButtons}
+                    continueAsGuestButtonLabelId="customer.continue"
+                    defaultShouldSubscribe={isSubscribed}
+                    email={this.draftEmail || email}
+                    isExpressPrivacyPolicy={isExpressPrivacyPolicy}
+                    isFloatingLabelEnabled={isFloatingLabelEnabled}
+                    isLoading={isLoadingGuestForm}
+                    onChangeEmail={this.handleChangeEmail}
+                    onContinueAsGuest={this.handleContinueAsGuest}
+                    onShowLogin={this.handleShowLogin}
+                    privacyPolicyUrl={privacyPolicyUrl}
+                    requiresMarketingConsent={requiresMarketingConsent}
+                />
         );
     }
 
@@ -376,6 +392,8 @@ class Customer extends Component<CustomerProps & WithCheckoutCustomerProps & Ana
         }
     };
 
+
+    // TODO: 作为游客登录之后将BC不存在的字段在这里上次到ygg API,数据存在于formValues里面
     private handleContinueAsGuest: (formValues: GuestFormValues) => Promise<void> = async (
         formValues,
     ) => {
@@ -385,6 +403,7 @@ class Customer extends Component<CustomerProps & WithCheckoutCustomerProps & Ana
             hasBillingId,
             defaultShouldSubscribe,
             onChangeViewType = noop,
+            onContinue=noop,
             onContinueAsGuest = noop,
             onContinueAsGuestError = noop,
             onSubscribeToNewsletter,
@@ -393,6 +412,12 @@ class Customer extends Component<CustomerProps & WithCheckoutCustomerProps & Ana
         const email = formValues.email.trim();
         const updateSubscriptionWhenUnchecked =
             hasBillingId || defaultShouldSubscribe ? false : undefined;
+
+console.log(formValues)
+
+onContinue(formValues)
+
+
 
         try {
             const { data } = await continueAsGuest({

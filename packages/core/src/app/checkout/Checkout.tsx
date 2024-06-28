@@ -125,6 +125,17 @@ export interface CheckoutState {
     isHidingStepNumbers: boolean;
     isSubscribed: boolean;
     buttonConfigs: PaymentMethod[];
+    customerInfo?: CustomerProps;
+}
+
+export interface CustomerProps {
+    email?: string; 
+    firstName?:string;
+    lastName?:string;
+    eventName?:string;
+    shouldSubscribe?: boolean;
+    isDedication?:boolean;
+    isAnonymously?:boolean;
 }
 
 export interface WithCheckoutProps {
@@ -167,7 +178,13 @@ class Checkout extends Component<
         isHidingStepNumbers: true,
         isSubscribed: false,
         buttonConfigs: [],
+        customerInfo:{}
     };
+
+    private  handleCustomerInfo:(info:CustomerProps)=>void=(info)=>{
+        console.log(info,1111)
+        this.setState({customerInfo:info})
+    }
 
     private embeddedMessenger?: EmbeddedCheckoutMessenger;
     private unsubscribeFromConsignments?: () => void;
@@ -390,6 +407,7 @@ class Checkout extends Component<
         const {
             customerViewType = isGuestEnabled ? CustomerViewType.Guest : CustomerViewType.Login,
             isSubscribed,
+            customerInfo
         } = this.state;
 
         return (
@@ -403,6 +421,7 @@ class Checkout extends Component<
                 suggestion={<CheckoutSuggestion />}
                 summary={
                     <CustomerInfo
+                        customerInfo={customerInfo}
                         onSignOut={this.handleSignOut}
                         onSignOutError={this.handleError}
                     />
@@ -415,6 +434,7 @@ class Checkout extends Component<
                     isWalletButtonsOnTop={isShowingWalletButtonsOnTop}
                     onAccountCreated={this.navigateToNextIncompleteStep}
                     onChangeViewType={this.setCustomerViewType}
+                    onContinue={this.handleCustomerInfo}
                     onContinueAsGuest={this.navigateToNextIncompleteStep}
                     onContinueAsGuestError={this.handleError}
                     onReady={this.handleReady}
@@ -704,11 +724,13 @@ class Checkout extends Component<
     private handleSignOut: (event: CustomerSignOutEvent) => void = ({ isCartEmpty }) => {
         const { loginUrl, cartUrl, isPriceHiddenFromGuests, isGuestEnabled } = this.props;
 
-        if (isPriceHiddenFromGuests) {
-            if (window.top) {
-                return (window.top.location.href = cartUrl);
-            }
-        }
+        console.log(isPriceHiddenFromGuests, cartUrl, loginUrl, 111)
+
+        // if (isPriceHiddenFromGuests) {
+        //     if (window.top) {
+        //         return (window.top.location.href = cartUrl);
+        //     }
+        // }
 
         if (this.embeddedMessenger) {
             this.embeddedMessenger.postSignedOut();
@@ -720,12 +742,13 @@ class Checkout extends Component<
 
         if (isCartEmpty) {
             this.setState({ isCartEmpty: true });
+            console.log(111111111)
 
-            if (!isEmbedded()) {
-                if (window.top) {
-                    return window.top.location.assign(loginUrl);
-                }
-            }
+            // if (!isEmbedded()) {
+            //     if (window.top) {
+            //         return window.top.location.assign(loginUrl);
+            //     }
+            // }
         }
 
         this.navigateToStep(CheckoutStepType.Customer);

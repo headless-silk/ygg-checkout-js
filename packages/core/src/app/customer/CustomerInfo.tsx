@@ -12,8 +12,19 @@ import { Button, ButtonSize, ButtonVariant } from '../ui/button';
 import canSignOut, { isSupportedSignoutMethod } from './canSignOut';
 
 export interface CustomerInfoProps {
+    customerInfo?:CustomerInfo;
     onSignOut?(event: CustomerSignOutEvent): void;
     onSignOutError?(error: CustomError): void;
+}
+
+export interface CustomerInfo {
+    email?: string; 
+    firstName?:string;
+    lastName?:string;
+    eventName?:string;
+    shouldSubscribe?: boolean;
+    isDedication?:boolean;
+    isAnonymously?:boolean;
 }
 
 export interface CustomerSignOutEvent {
@@ -30,6 +41,7 @@ interface WithCheckoutCustomerInfoProps {
 
 const CustomerInfo: FunctionComponent<CustomerInfoProps & WithCheckoutCustomerInfoProps> = ({
     email,
+    customerInfo,
     methodId,
     isSignedIn,
     isSigningOut,
@@ -55,6 +67,9 @@ const CustomerInfo: FunctionComponent<CustomerInfoProps & WithCheckoutCustomerIn
             }
         }
     };
+
+
+    console.log(customerInfo,1111)
 
     return (
         <div className="customerView" data-test="checkout-customer-info">
@@ -91,9 +106,13 @@ function mapToWithCheckoutCustomerInfoProps({
         statuses: { isSigningOut },
     } = checkoutState;
 
+    console.log(checkoutState)
+
     const billingAddress = getBillingAddress();
     const checkout = getCheckout();
     const customer = getCustomer();
+
+console.log(customer)
 
     if (!billingAddress || !checkout || !customer) {
         return null;

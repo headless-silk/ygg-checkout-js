@@ -1,7 +1,7 @@
 import { FieldProps } from 'formik';
 import React, { FunctionComponent, memo } from 'react';
 
-import { TranslatedHtml } from '@bigcommerce/checkout/locale';
+// import { TranslatedHtml } from '@bigcommerce/checkout/locale';
 
 import { Input, Label } from '../ui/form';
 
@@ -11,7 +11,7 @@ export type SubscribeFieldProps = FieldProps<boolean> & {
 
 const SubscribeField: FunctionComponent<SubscribeFieldProps> = ({
     field,
-    requiresMarketingConsent,
+    // requiresMarketingConsent,
 }) => (
     <>
         <Input
@@ -24,13 +24,14 @@ const SubscribeField: FunctionComponent<SubscribeFieldProps> = ({
         />
 
         <Label htmlFor={field.name}>
-            <TranslatedHtml
+            Please keep me informed about news and events at YouGiveGoods
+            {/* <TranslatedHtml
                 id={
                     requiresMarketingConsent
                         ? 'customer.guest_marketing_consent'
                         : 'customer.guest_subscribe_to_newsletter_text'
                 }
-            />
+            /> */}
         </Label>
     </>
 );
